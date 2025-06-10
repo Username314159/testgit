@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<pre><div></div></pre>
+
+<html>
+    <head>
+        <title>JumpStarting Javascript</title>
+        <link rel = "icon" type = "image/png" href = "images/CoffeeFavicon.png">
+        <meta charset = UTF-8>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <style>
+            .mycontainer {width: 100%;
+                          overflow:auto;}
+            .mycontainer > div {width:33%;
+                                float:left;}
+
+            .grid-container {display: grid;
+                             grid-template-columns:30% 30% 30%;
+                             background-color: aquamarine;}
+            .city {background-color:azure;
+                   padding: 10px;
+                   margin: 5px;
+                   border: solid burlywood;}
+            .note {color:brown;
+                   font-family:cursive;}
+            .text {font-size:large;}
+            #myHeader {font-size:large;
+                       text-align:center;}
+
+            div {color: rgb(106, 13, 13);}
+            .special-buttons {font-size:20px;
+                              padding: 10px;
+                              background-color:rgb(224, 151, 224);
+                              cursor:pointer;
+                              color:aliceblue;
+                              box-shadow:0 3px 5px peru;}
+            .special-buttons:active {transform:translateY(2px);
+                                     box-shadow:none;}
+            a:hover {color:blueviolet;} 
+            a {color:brown;}
+            a:active {color:rgb(224, 156, 72);}
+        </style>
+        <!--div margin: auto center aligns div block-->
+    </head>
+    <body>
+
+        <div id = "myHeader" class = "mycontainer">
+
+            <div style = "background-color:aliceblue">
+                <h1>Learning Div First</h1>
+                <p>Starting with Javascript soon</p>
+            </div>
+            <div style = "background-color:lightpink">
+                <h1>What is the First step?</h1>
+                <p><a href = "file:///C:/Users/carso/OneDrive/Documents/La%20web/new.html#list2">Going through tutorials</a></p>
+            </div>
+            <div style = "background-color:lightyellow">
+                <h1>Roughly how much time would it take?</h1>
+                <p>until everything is finished.</p>
+            </div>
+        </div>
+
+        <div class = "grid-container">
+            <div>
+                <h1 id = "Hello">Hi</h1>
+                <p>I like <span class = "note text">boxes</span></p>
+            </div>
+            <div>
+                <h2>But...</h2>
+                <p>do you know what <span class = "note text">I</span> like more?</p>
+            </div>
+            <div>
+                <h3>The answer...</h3>
+                <p>is <span class = "note text">food</span>!</p>
+            </div>
+        </div><hr>
+
+        <!--no px for canvas!-->
+        <canvas id = "myCanvas" width = "490" height = "300"
+                style = "border: 2px solid black;"></canvas>
+        <canvas id = "Canvasa" width = "500" height = "300"
+                style = "border: 2px dotted red"></canvas>
+        <canvas id = "THECanvas" width = "489" height = "300"
+                style = "border: 2px solid goldenrod"></canvas><br><hr>
+
+        <div style = "text-align:center">
+        <img src = "https://th.bing.com/th/id/OIP.svHbbW9cfW0yir-qCv-zNAHaFj?r=0&rs=1&pid=ImgDetMain"
+             alt = "coffee cup" style = "width:400px;height:300px;border:3px solid brown" id ="coffee"><br><br>
+        <button class = "special-buttons" type = "button" onclick = displayImage()>draw image</button>
+        <button class = "special-buttons" type = "button" onclick = hideImage()>erase image</button>
+        </div><br>
+        <canvas id = "coffeeCanvas" width = "1480" height = "800"
+                style = "border:1px solid salmon"></canvas>
+
+        <!--LinearGradient
+        0,1 starting point of blending
+        2,3 ending point of blending
+        
+        addColorStop
+        0 what color at 0% blend
+        1 what color at 100% blend
+        
+        Radial Gradient
+        0,1 middle of circle 1
+        2 radius of circle 1
+        3,4 middle of circle 2
+        5 radius of circle 2-->
+        <script>
+            
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var b = document.getElementById("Canvasa");
+            var ctxb = b.getContext("2d");
+            var gold = document.getElementById("THECanvas");
+            var rod = gold.getContext("2d");
+            
+            ctx.moveTo(0,0);
+            ctx.lineTo(490,300);
+            ctx.stroke();
+            ctx.moveTo(0,300);
+            ctx.lineTo(490,0);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(245,150,100,0,2*Math.PI);
+            ctx.stroke();
+            ctx.font = "30px Verdana";
+            ctx.fillText("Hello World",5,40);
+            ctx.strokeText("Hello World",5,80);
+
+            var gdt = ctxb.createLinearGradient(50,50,300,20);
+            gdt.addColorStop(0,"purple");
+            gdt.addColorStop(1,"pink");
+            ctxb.fillStyle = gdt;
+            ctxb.fillRect(0,0,500,300);
+
+            var canvasGold = rod.createRadialGradient(0,0,270,0,20,100);
+            canvasGold.addColorStop(0,"goldenrod");
+            canvasGold.addColorStop(1,"coral");
+            rod.fillStyle = canvasGold;
+            rod.fillRect(0,0,489,300);
+
+            ctxb.beginPath();
+            ctxb.moveTo(0,150);
+            ctxb.lineTo(500,150);
+            ctxb.lineTo(250,0);
+            ctxb.lineTo(250,300);
+            ctxb.stroke();
+            ctxb.closePath();
+
+            var coffee = document.getElementById("coffeeCanvas");
+            var coffeeCtx = coffee.getContext("2d");
+            var img = document.getElementById("coffee");
+            var canvasCoffee = coffeeCtx.createRadialGradient(800,400,600,700,400,1000);
+            canvasCoffee.addColorStop(0,"black");
+            canvasCoffee.addColorStop(1,"grey");
+            coffeeCtx.fillStyle = canvasCoffee;
+            coffeeCtx.fillRect(0,0,1500,800);
+
+            function displayImage()
+            {
+                coffeeCtx.drawImage(img, 0, 0, 1480, 800);
+            }
+            function hideImage()
+            {
+                coffeeCtx.clearRect(0,0,1480,800);
+                coffeeCtx.fillRect(0,0,1500,800);
+            }
+
+        </script>
+        <!--image might not display due to being called before its loaded in. Can do:
+        
+        img.onload = function() {
+            coffeeCtx.drawImage(img, 0, 0, 1480, 800);
+            }
+        -->
+
+        <div class = "city">
+            <h1>Paris</h1>
+            <p><a href = "file:///C:/Users/carso/OneDrive/Documents/La%20web/new.html"
+                  target = "iframe_a">The capital of France</a></p>
+        </div>
+        <div class = "city">
+            <h1>Berlin</h1>
+            <p>The capital of Germany</p>
+        </div>
+        <div class = "city">
+            <h1>London</h1>
+            <p>The capital of England</p>
+        </div>
+
+    <script>
+    function switches(click) {
+        var link;
+        if (click == 0){
+            link = "file:///C:/Users/carso/OneDrive/Documents/La%20web/new.html"
+        } else {
+            link = "file:///C:/Users/carso/OneDrive/Documents/La%20web/practice.html"
+        }
+        document.getElementById("iframer").src = link;
+    }
+    </script>
+
+    <button onclick = "displayResult()">Change text</button>
+    <button type = "button" onclick = "document.getElementById('time').innerHTML = Date()">Display Time</button>
+    <button type = "button" onclick = "switches(0)">Change iframe</button>
+    <button type = "button" onclick = "switches(1)">Restore iframe</button>
+    <br><br>
+    
+
+    <p id = "demo"></p>
+    <p id = "time"></p>
+    <script>
+        document.getElementById('demo').innerHTML = "Hello Javascript!";
+    </script>
+    <script>
+        function displayResult() {
+            document.getElementById("Hello").innerHTML = "Have a nice day!"
+            document.getElementById("Hello").style.fontSize = "25px";
+            document.getElementById("Hello").style.color = "red";
+            document.getElementById("demo").style.backgroundColor = "yellow";
+        }
+
+        
+
+    </script>
+    <!--ctx.arc(horizontal spacing, vertical spacing, size, arc completion?,how much drawn form top?)-->
+
+    <iframe src = "file:///C:/Users/carso/OneDrive/Documents/La%20web/practice.html" 
+            title = "Space Odyssey" style = "width:1500px;height:900px;border:2px solid purple;"
+            name = "iframe_a" id = "iframer">Project</iframe>
+
+    <noscript>Sorry, your browser doesn't support Javascript!</noscript>
+
+    </body>
+</html>
